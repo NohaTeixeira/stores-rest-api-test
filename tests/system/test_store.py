@@ -12,7 +12,7 @@ class StoreTest(BaseTest):
 
                 self.assertEqual(response.status_code, 201)
                 self.assertIsNotNone(StoreModel.find_by_name('test'))
-                self.assertDictEqual({'name': 'test', 'items': []}, json.loads(response.data))
+                self.assertDictEqual({'id': 1, 'name': 'test', 'items': []}, json.loads(response.data))
 
     def test_create_duplicate_store(self):
         with self.app() as client:
@@ -46,7 +46,7 @@ class StoreTest(BaseTest):
                 response = client.get('/store/test')
 
                 self.assertEqual(response.status_code, 200)
-                self.assertDictEqual({'name': 'test', 'items': []}, json.loads(response.data))
+                self.assertDictEqual({'id': 1, 'name': 'test', 'items': []}, json.loads(response.data))
 
     def test_store_not_found(self):
         with self.app() as client:
@@ -67,7 +67,7 @@ class StoreTest(BaseTest):
                 response = client.get('/store/test')
 
                 self.assertEqual(response.status_code, 200)
-                self.assertDictEqual({'name': 'test', 'items': [{'name': 'test', 'price': 19.99}]}, json.loads(response.data))
+                self.assertDictEqual({'id': 1, 'name': 'test', 'items': [{'name': 'test', 'price': 19.99}]}, json.loads(response.data))
 
 
     def test_store_list(self):
@@ -78,7 +78,7 @@ class StoreTest(BaseTest):
                 response = client.get('/stores')
 
                 self.assertEqual(response.status_code, 200)
-                self.assertDictEqual({'stores': [{'name': 'test', 'items': []}]}, json.loads(response.data))
+                self.assertDictEqual({'stores': [{'id': 1, 'name': 'test', 'items': []}]}, json.loads(response.data))
 
     def test_store_list_with_items(self):
         with self.app() as client:
@@ -90,4 +90,4 @@ class StoreTest(BaseTest):
                 response = client.get('/stores')
 
                 self.assertEqual(response.status_code, 200)
-                self.assertDictEqual({'stores': [{'name': 'test', 'items': [{'name': 'test', 'price': 19.99}]}]}, json.loads(response.data))
+                self.assertDictEqual({'stores': [{'id': 1, 'name': 'test', 'items': [{'name': 'test', 'price': 19.99}]}]}, json.loads(response.data))

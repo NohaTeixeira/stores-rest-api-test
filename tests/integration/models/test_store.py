@@ -38,6 +38,7 @@ class StoreTest(BaseTest):
         with self.app_context():
             store = StoreModel('test')
             expected = {
+                "id": None,
                 "name": "test",
                 "items": []
             }
@@ -61,6 +62,7 @@ class StoreTest(BaseTest):
 
             # Expected output with the item correctly linked to the store
             expected = {
+                "id": 1,
                 "name": "test",
                 "items": [{"name": "test_item", "price": 9.99}]
             }
